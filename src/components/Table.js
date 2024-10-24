@@ -103,7 +103,7 @@ const Table = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('/api/users'); // Update to your actual endpoint
+                const response = await axios.get('/api/users'); 
                 setRecords(response.data);
                 setFilteredRecords(response.data);
             } catch (error) {
@@ -127,7 +127,7 @@ const Table = () => {
         try {
             const user = records.find(record => record.email === email);
             const updatedStatus = user.AccountStatus === 'Active' ? 'Inactive' : 'Active';
-            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus }); // Update to your actual endpoint
+            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus }); 
             setRecords(prevRecords =>
                 prevRecords.map(record =>
                     record.email === email ? { ...record, AccountStatus: updatedStatus } : record
