@@ -10,6 +10,10 @@ import Dashboard from './pages/Dashboard';
 import SearchProfile from './pages/SearchProfile';
 import Messages from './pages/Messages';
 import Notifications from './pages/Notifications';
+import ProfilePage from './pages/ProfilePage';
+import ProfilePage2 from './pages/ProfilePage2';
+
+
 
 
 
@@ -23,6 +27,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/profilepage2" element={<ProfilePage2 />} />
           <Route path="/notfound" element={<NotFound />} />
           <Route path="/dashboard" element={<Dashboard />}/>
           <Route path="/searchprofile" element={<SearchProfile />}/>

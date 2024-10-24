@@ -11,6 +11,8 @@ import SearchProfile from './pages/SearchProfile';
 import Messages from './pages/Messages';
 import Notifications from './pages/Notifications';
 import UserListPage from './pages/UserListPage';
+import ProfilePage from './pages/ProfilePage';
+import ProfilePage2 from './pages/ProfilePage2';
 
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
           <Route path="/messages" element={<Messages />}/>
           <Route path="/notifications" element={<Notifications />}/>
           <Route path="/userlistpage" element={<UserListPage />}/>
+          <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/profilepage2" element={<ProfilePage2 />} />
         </Routes>
       </Router>
     </div>
