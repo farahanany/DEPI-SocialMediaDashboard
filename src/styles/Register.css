@@ -93,7 +93,49 @@ body {
     color: black; /* Change to your preferred color */
     font-size: 18px; /* Adjust size if necessary */
   }
-  
+  /* Container for the select element */
+.select-container {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  max-width: 300px; /* Set a max width for the dropdown */
+  margin-bottom: 20px; /* Space between elements */
+}
+
+/* Style the select element */
+.select-container select {
+  width: 100%;
+  padding: 10px 15px; /* Padding for inner spacing */
+  font-size: 16px; /* Font size */
+  color: #333; /* Text color */
+  background-color: #f9f9f9; /* Background color */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  appearance: none; /* Remove default styling */
+  outline: none; /* Remove focus outline */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: border-color 0.3s; /* Transition for border color */
+}
+
+/* Change border color on focus */
+.select-container select:focus {
+  border-color: #007bff; /* Change this to your preferred focus color */
+}
+
+/* Style the custom arrow */
+.select-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px; /* Space from the right edge */
+  transform: translateY(-50%); /* Center the arrow vertically */
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333; /* Color of the arrow */
+  pointer-events: none; /* Prevent clicking on the arrow */
+}
+
   /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
     .register {

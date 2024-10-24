@@ -12,6 +12,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [gender, setGender]=useState('male');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -60,6 +61,7 @@ const Register = () => {
               <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
             </span>
           </div>
+
           <div className='password-container'>
             <input
               type={showConfirmPassword ? 'text' : 'password'}
@@ -72,6 +74,14 @@ const Register = () => {
               <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
             </span>
           </div>
+          <div className='select-container'>
+      <select value={gender} onChange={(e) => setGender(e.target.value)}>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
           <button className='register-dataformbtn' type="submit">Register</button>
           <small style={{ marginTop: '20px', display: 'block' }}>
             Already Have an Account? <Link to="/login">Login Here!</Link>
