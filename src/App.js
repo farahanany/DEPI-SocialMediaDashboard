@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Post from './pages/Post';
 import NotFound from './pages/NotFound';
 import Dashboard from './pages/Dashboard';
+import SearchProfile from './pages/SearchProfile';
 
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/post/:id" element={<Post />} />
           <Route path="/notfound" element={<NotFound />} />
           <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/searchprofile" element={<SearchProfile />}/>
         </Routes>
       </Router>
     </div>
