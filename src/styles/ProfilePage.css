@@ -1,0 +1,13 @@
+.profile-page {
+  display: flex; /* Ensure the sidebar and main content are in a row */
+}
+
+.sidebar {
+  width: 250px; /* Set a fixed width for the sidebar */
+}
+
+.main-content {
+  flex-grow: 1; /* Take the remaining width */
+  padding: 20px; /* Add some padding */
+  background-color: #f4f4f9; /* Optional: background color for main content */
+}
