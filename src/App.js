@@ -6,11 +6,13 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Post from './pages/Post';
 import NotFound from './pages/NotFound';
+import Alert from './components/Alert';
 
 function App() {
   return (
     <div className="App">
       <Router>
+       <Alert/>
         <Routes>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
