@@ -37,7 +37,7 @@ export const login=(data)=>async (dispatch)=>{
 
     })
     } catch(error){
-    console.log(error.response.data.msg)
+    console.log(error)
     dispatch(
         {
             type:ALERT_TYPES.ALERT,
@@ -47,4 +47,24 @@ export const login=(data)=>async (dispatch)=>{
         }
     )
     }
+}
+
+export const logout =()=>async(dispatch)=>{
+    try{
+        localStorage.removeItem('login');
+        await postDataApi('logout');
+        window.location.href='/';
+
+    } catch(error){
+        console.log(error)
+        dispatch(
+            {
+                type:ALERT_TYPES.ALERT,
+                payload:{
+                    error:error.response.data.msg,
+                }
+            }
+        )
+    }
+   
 }

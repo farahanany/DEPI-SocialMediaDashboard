@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Ensure this import is correct
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Use useNavigate instead of useHistory
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; // Import eye icons
 import "../styles/Login.css";
-import {login} from '../redux/actions/authActions'; // Import userActions from redux
-import {useDispatch} from 'react-redux'; // Import useDispatch from react-redux
+import { login } from '../redux/actions/authActions'; // Import login action
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch and useSelector
+
 const Login = () => {
-  const initialState = { email: '', password: '' } // Fixed state naming convention
-  
+  const initialState = { email: '', password: '' }; // Fixed state naming convention
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const { auth } = useSelector(state => state); // Get auth from Redux store
   const [showPass, setShowPass] = useState(false); // Fixed state naming convention
   const [userData, setUserData] = useState(initialState); // Fixed state naming convention
-  const dispatch=useDispatch(); // Fixed useDispatch spelling
-const {email,password}=userData; // Fixed destructuring
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
-    setUserData({...userData,[name]:value})
-  }
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (auth.token) {
+      navigate('/'); // Navigate to home page if authenticated
+    }
+  }, [auth.token, navigate]);
 
+  const { email, password } = userData; // Fixed destructuring
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
 
-
-
-  const handleSubmit =  async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUserData({email,password})
-   await  dispatch(login(userData)); // Fixed dispatch function
-
-  }
- 
+    setUserData({ email, password });
+    await dispatch(login(userData)); // Fixed dispatch function
+  };
 
   return (
     <div className='login'>

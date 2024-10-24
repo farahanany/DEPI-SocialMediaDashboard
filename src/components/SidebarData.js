@@ -1,4 +1,4 @@
-import { FaHome, FaSignInAlt, FaListAlt, FaUserPlus, FaSearch } from 'react-icons/fa'; // Added FaSearch for Search Profile
+import { FaHome, FaSignInAlt, FaListAlt, FaUserPlus, FaSearch, FaBell, FaEnvelope } from 'react-icons/fa'; // Added FaBell for Notifications and FaEnvelope for Messages
 
 export const SidebarData = [
     {
@@ -18,11 +18,25 @@ export const SidebarData = [
         icon: <FaListAlt />,   // Icon for User List Page
         link: "/UserListPage"
     },
+
+    {
+        title: "Notifications",
+        icon: <FaBell />,   // Icon for Notifications Page
+        link: "/notifications"  // Link to Notifications page
+    },
+
+    {
+        title: "Messages",
+        icon: <FaEnvelope />,   // Icon for Messages Page
+        link: "/messages"  // Link to Messages page
+    },
+
     {
         title: "Login",
         icon: <FaSignInAlt />,   // Icon for Login Page
         link: "/login"
     },
+
     {
         title: "Sign Up",
         icon: <FaUserPlus />,   // Icon for Sign Up Page
