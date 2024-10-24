@@ -1,0 +1,106 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.user-list-page {
+    display: flex; /* Use flexbox to align items horizontally */
+    height: 100vh; /* Full height of the viewport */
+}
+
+.content {
+    flex: 1; /* Allow content to take remaining space */
+    padding: 10px; /* Add padding for aesthetics */
+    background-color: #fff; /* Background color for content */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+/* Optional: Adding styles for the Table to ensure it fits well */
+table {
+    width: 100%; /* Ensure the table takes the full width of the content area */
+    border-collapse: collapse; /* Remove gaps between table cells */
+}
+
+th, td {
+    padding: 12px; /* Add padding to table cells */
+    border: 1px solid #ccc; /* Add border to table cells */
+    text-align: left; /* Align text to the left */
+}
+
+.custom-search-input {
+    width: 250px; 
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    font-size: 14px;
+}
+
+.custom-search-input::placeholder {
+    color: #aaa;
+}
+
+.custom-search-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #1c6b92; 
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-search-button:hover {
+    background-color: #155571; 
+}
+
+.switch {
+    margin-right: 8px;
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}

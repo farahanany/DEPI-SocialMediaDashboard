@@ -24,6 +24,11 @@ export const SidebarData = [
         icon: <FaBell />,   // Icon for Notifications Page
         link: "/notifications"  // Link to Notifications page
     },
+    {
+        title: "User List",
+        icon: <FaListAlt />,   // Icon for User List Page
+        link: "/userlistpage"
+    },
 
     {
         title: "Messages",

@@ -1,0 +1,101 @@
+/* Table.css */
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+
+
+.container {
+    margin: 20px auto;
+}
+
+.custom-search-input {
+    width: 250px; /* Default width */
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    font-size: 14px;
+}
+
+.custom-search-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #1c6b92;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-search-button:hover {
+    background-color: #155571;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .custom-search-input {
+        width: 40%; /* Full width on smaller screens */
+        margin-bottom: 10px; /* Add margin for spacing */
+    }
+
+    .custom-search-button {
+        width: auto; /* Keep the button width auto on smaller screens */
+        margin-left: 0; /* Reset margin */
+    }
+
+    .container {
+        padding: 5px; /* Less padding for smaller screens */
+    }
+
+ 
+    .d-flex {
+        flex-direction: column; /* Stack elements in column */
+    }
+
+    .d-flex > div {
+        display: flex; /* Flex for inner container */
+        align-items: center; /* Align items vertically */
+        justify-content: space-between; /* Space between input and button */
+    }
+
+    /* Style the delete button */
+    .delete-button-container {
+        margin-top: 0px; /* Space above the delete button */
+    display: flex;
+    justify-content: flex-start;
+    
+    }
+  
+    .rdt_Table {
+        overflow-x: auto; /* Enable horizontal scrolling */
+        display: block; /* Allow block display for scroll */
+        width: 100%; /* Full width */
+    }
+
+    .rdt_Table .rdt_TableHead {
+        display: block; /* Stack headers */
+    }
+
+    .rdt_Table .rdt_TableBody {
+        display: block; /* Stack body */
+    }
+
+    .rdt_Table .rdt_TableRow {
+        display: flex; /* Flex for rows */
+        flex-direction: column; /* Stack columns */
+    }
+
+    .rdt_Table .rdt_TableRow > div {
+        width: 100%; /* Full width for cells */
+        display: flex; /* Flex for cell content */
+        justify-content: space-between; /* Space between elements */
+    }
+
+    /* Hide some columns on smaller screens */
+    @media (max-width: 480px) {
+        .rdt_Table .rdt_TableRow > div:nth-child(3), /* Hide Account Type */
+        .rdt_Table .rdt_TableRow > div:nth-child(4) { /* Hide Added Date */
+            display: none; /* Do not display */
+        }
+    }
+}

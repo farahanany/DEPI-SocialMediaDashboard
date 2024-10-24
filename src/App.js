@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard';
 import SearchProfile from './pages/SearchProfile';
 import Messages from './pages/Messages';
 import Notifications from './pages/Notifications';
-
+import UserListPage from './pages/UserListPage';
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
           <Route path="/searchprofile" element={<SearchProfile />}/>
           <Route path="/messages" element={<Messages />}/>
           <Route path="/notifications" element={<Notifications />}/>
+          <Route path="/userlistpage" element={<UserListPage />}/>
         </Routes>
       </Router>
     </div>
