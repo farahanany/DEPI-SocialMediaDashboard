@@ -79,6 +79,21 @@ body {
     background-color: #0056b3;
   }
   
+
+  .password-container {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: black; /* Change to your preferred color */
+    font-size: 18px; /* Adjust size if necessary */
+  }
+  
   /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
     .register {
