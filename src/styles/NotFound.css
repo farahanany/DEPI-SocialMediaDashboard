@@ -1,0 +1,24 @@
+.notfound{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.notfound-text{
+    color: red;
+    transform: translateY(40vh);
+    font-size: 3rem;
+    font-weight: 500;
+}
+.notfound-found{
+    margin-left: 10px;
+    color: red;
+    transform: translateY(50vh);
+    font-size: 1rem;
+    font-weight: 500;
+}
+a{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 800;
+}
