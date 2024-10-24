@@ -10,7 +10,7 @@ const Table = () => {
     const columns = [
         {
             name: 'Avatar',
-            selector: row => row.avatar, // Correct field name from schema
+            selector: row => row.avatar,
             cell: row => (
                 <img
                     src={row.avatar}
@@ -27,12 +27,12 @@ const Table = () => {
         },
         {
             name: 'Email',
-            selector: row => row.email, // Correct field name from schema
+            selector: row => row.email,
             sortable: true
         },
         {
             name: 'Full Name',
-            selector: row => row.fullname, // Correct field name from schema
+            selector: row => row.fullname,
             sortable: true
         },
         {
@@ -55,9 +55,9 @@ const Table = () => {
         },
         {
             name: 'Added Date',
-            selector: row => row.createdAt, // Use Mongoose timestamps
+            selector: row => row.createdAt,
             sortable: true,
-            format: row => new Date(row.createdAt).toLocaleDateString() // Format date
+            format: row => new Date(row.createdAt).toLocaleDateString()
         },
         {
             name: 'Account Status',
@@ -68,7 +68,7 @@ const Table = () => {
                         <input
                             type="checkbox"
                             checked={row.AccountStatus === 'Active'}
-                            onChange={() => toggleStatus(row.email)} // Correct field name from schema
+                            onChange={() => toggleStatus(row.email)}
                         />
                         <span className="slider"></span>
                     </label>
@@ -91,78 +91,83 @@ const Table = () => {
                         padding: '10px 10px',
                         cursor: 'pointer'
                     }}
-                    onClick={() => handleViewProfile(row.email)} // Correct field name from schema
+                    onClick={() => handleViewProfile(row.email)}
                 >
                     View Profile
-                </button>
-            ),
-            ignoreRowClick: true, // Prevent row click event
-            allowOverflow: true,
-            button: true
-        },
+               
+                    </button>
+            )
+        }
     ];
 
-    const handleFilter = () => {
-        const newData = records.filter(row => {
-            const fullName = row.fullname.toLowerCase(); // Correct field name from schema
-            return fullName.includes(searchTerm.toLowerCase());
-        });
-        setFilteredRecords(newData); // Update filtered records
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('/api/users'); // Update to your actual endpoint
+                setRecords(response.data);
+                setFilteredRecords(response.data);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+
+        fetchUsers();
+    }, []);
+
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+        const filteredData = records.filter(record =>
+            record.fullname.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            record.email.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredRecords(filteredData);
     };
 
-    const toggleStatus = (email) => {
-        const updatedRecords = records.map(record => {
-            if (record.email === email) { // Correct field name from schema
-                return {
-                    ...record,
-                    AccountStatus: record.AccountStatus === 'Active' ? 'Inactive' : 'Active'
-                };
-            }
-            return record;
-        });
-        setRecords(updatedRecords);
-        setFilteredRecords(updatedRecords); // Update filtered records as well
+    const toggleStatus = async (email) => {
+        try {
+            const user = records.find(record => record.email === email);
+            const updatedStatus = user.AccountStatus === 'Active' ? 'Inactive' : 'Active';
+            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus }); // Update to your actual endpoint
+            setRecords(prevRecords =>
+                prevRecords.map(record =>
+                    record.email === email ? { ...record, AccountStatus: updatedStatus } : record
+                )
+            );
+        } catch (error) {
+            console.error('Error updating user status:', error);
+        }
     };
 
     const handleViewProfile = (email) => {
-        console.log(`Viewing profile for: ${email}`); // Corrected string interpolation
+        // Navigate to the user profile page or show a modal with user details
+        alert(`Viewing profile for ${email}`); // Replace with your actual navigation or modal code
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/path/to/your/api/endpoint'); // Adjust the API endpoint
-                setRecords(response.data); // Assuming response data is an array of users
-                setFilteredRecords(response.data); // Initialize filtered records
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
-    }, []);
-
     return (
-        <div className='container mt-5'>
-            <div className='text-end'>
-                <input 
-                    type="text" 
-                    value={searchTerm} 
-                    onChange={(e) => setSearchTerm(e.target.value)} 
-                    placeholder="Search User"
-                    className="custom-search-input"
-                />
-                <button 
-                    onClick={handleFilter} 
-                    className='btn btn-primary ms-2 custom-search-button'>
-                    Search
-                </button>
-            </div>
+        <div>
+            <input
+                type="text"
+                placeholder="Search by name or email"
+                value={searchTerm}
+                onChange={handleSearch}
+                style={{
+                    margin: '10px 0',
+                    padding: '8px',
+                    border: '1px solid #ccc',
+                    borderRadius: '4px',
+                    width: '100%'
+                }}
+            />
             <DataTable
                 columns={columns}
-                data={filteredRecords} // Use filtered records for data
-                selectableRows
-                fixedHeader
+                data={filteredRecords}
                 pagination
+                striped
+                highlightOnHover
+                pointerOnHover
+                noDataComponent="No users found"
+                paginationPerPage={5}
+                paginationRowsPerPageOptions={[5, 10, 20]}
             />
         </div>
     );
