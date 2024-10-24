@@ -36,46 +36,22 @@ const Table = () => {
             sortable: true
         },
         {
-            name: 'Account Type',
-            selector: row => row.AccountType,
-            cell: row => (
-                <div
-                    style={{
-                        borderRadius: '10px',
-                        border: `2px solid ${row.AccountType === 'Business' ? '#1c6b92' : 'gray'}`,
-                        padding: '7px 20px',
-                        display: 'inline-block',
-                        color: 'black',
-                    }}
-                >
-                    {row.AccountType}
-                </div>
-            ),
+            name: 'Username',
+            selector: row => row.username,
             sortable: true
         },
         {
-            name: 'Added Date',
-            selector: row => row.createdAt,
-            sortable: true,
-            format: row => new Date(row.createdAt).toLocaleDateString()
+            name: 'Gender',
+            selector: row => row.gender,
+            sortable: true
         },
         {
             name: 'Account Status',
-            selector: row => row.AccountStatus,
+            selector: row => row.accountStatus,
             cell: row => (
-                <div className="d-flex align-items-center">
-                    <label className="switch">
-                        <input
-                            type="checkbox"
-                            checked={row.AccountStatus === 'Active'}
-                            onChange={() => toggleStatus(row.email)}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                    <span className={`badge ${row.AccountStatus === 'Active' ? 'bg-success' : 'bg-danger'} me-2`}>
-                        {row.AccountStatus}
-                    </span>
-                </div>
+                <span className={`badge ${row.accountStatus === 'Active' ? 'bg-success' : 'bg-danger'}`}>
+                    {row.accountStatus}
+                </span>
             ),
             sortable: true
         },
@@ -118,27 +94,10 @@ const Table = () => {
         setSearchTerm(e.target.value);
         const filteredData = records.filter(record =>
             record.fullname.toLowerCase().includes(e.target.value.toLowerCase()) ||
-            record.email.toLowerCase().includes(e.target.value.toLowerCase())
+            record.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
+            record.username.toLowerCase().includes(e.target.value.toLowerCase())
         );
         setFilteredRecords(filteredData);
-        console.log('Filtered records:', filteredData); // Log filtered records
-    };
-
-    const toggleStatus = async (email) => {
-        try {
-            const user = records.find(record => record.email === email);
-            console.log('Current user:', user); // Log current user
-            const updatedStatus = user.AccountStatus === 'Active' ? 'Inactive' : 'Active';
-            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus });
-            console.log('Updated user status:', { email, AccountStatus: updatedStatus }); // Log updated status
-            setRecords(prevRecords =>
-                prevRecords.map(record =>
-                    record.email === email ? { ...record, AccountStatus: updatedStatus } : record
-                )
-            );
-        } catch (error) {
-            console.error('Error updating user status:', error);
-        }
     };
 
     const handleViewProfile = (email) => {
@@ -150,7 +109,7 @@ const Table = () => {
         <div>
             <input
                 type="text"
-                placeholder="Search by name or email"
+                placeholder="Search by name, username, or email"
                 value={searchTerm}
                 onChange={handleSearch}
                 style={{
@@ -165,12 +124,8 @@ const Table = () => {
                 columns={columns}
                 data={filteredRecords}
                 pagination
-                striped
                 highlightOnHover
-                pointerOnHover
-                noDataComponent="No users found"
-                paginationPerPage={5}
-                paginationRowsPerPageOptions={[5, 10, 20]}
+                selectableRows
             />
         </div>
     );
