@@ -1,3 +1,8 @@
+body{
+    background-color: white;
+}
+
+
 .notfound{
     text-align: center;
     display: flex;

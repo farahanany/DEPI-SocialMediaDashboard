@@ -1,0 +1,105 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Register Container */
+  .register {
+    width: 100%;
+    margin-top: 50px;
+    max-width: 400px;
+    background-color: #1c6b92;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  /* Header Styles */
+  .register-header {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .register-subheader {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  /* Input Field Styles */
+  .register-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center children horizontally */
+  }
+  
+  .register-dataform input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  
+  .register-dataform input:focus {
+    border-color: #155571;
+    outline: none;
+  }
+  
+  /* Button Styles */
+  .register-dataformbtn {
+    width: 100%; /* Keep the button width at 50% */
+    padding: 12px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px; /* Optional: add some space above the button */
+    align-self: center; /* Center the button */
+  }
+  
+  .register-dataformbtn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .register {
+      padding: 20px;
+      margin: 10px;
+    }
+    
+    .register-header {
+      font-size: 20px; /* Responsive header font size */
+    }
+    
+    .register-subheader {
+      font-size: 14px; /* Responsive subheader font size */
+    }
+    
+    .register-dataform input {
+      font-size: 14px; /* Responsive input font size */
+    }
+    
+    .register-dataformbtn {
+      font-size: 14px; /* Responsive button font size */
+    }
+  }
+  
