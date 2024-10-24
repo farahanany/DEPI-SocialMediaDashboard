@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 const Table = () => {
     const [records, setRecords] = useState([]);
@@ -9,11 +9,11 @@ const Table = () => {
 
     const columns = [
         {
-            name: '',
-            selector: row => row.Avatar,
+            name: 'Avatar',
+            selector: row => row.avatar, // Correct field name from schema
             cell: row => (
                 <img
-                    src={row.Avatar}
+                    src={row.avatar}
                     alt="Avatar"
                     style={{
                         width: '40px',
@@ -27,12 +27,12 @@ const Table = () => {
         },
         {
             name: 'Email',
-            selector: row => row.Email,
+            selector: row => row.email, // Correct field name from schema
             sortable: true
         },
         {
             name: 'Full Name',
-            selector: row => `${row.Fname} ${row.Lname}`, // Corrected template literal
+            selector: row => row.fullname, // Correct field name from schema
             sortable: true
         },
         {
@@ -42,7 +42,7 @@ const Table = () => {
                 <div
                     style={{
                         borderRadius: '10px',
-                        border: `2px solid ${row.AccountType === 'Business' ? '#1c6b92' : 'gray'}`, // Corrected template literal
+                        border: `2px solid ${row.AccountType === 'Business' ? '#1c6b92' : 'gray'}`,
                         padding: '7px 20px',
                         display: 'inline-block',
                         color: 'black',
@@ -55,8 +55,9 @@ const Table = () => {
         },
         {
             name: 'Added Date',
-            selector: row => row.AddedDate,
-            sortable: true
+            selector: row => row.createdAt, // Use Mongoose timestamps
+            sortable: true,
+            format: row => new Date(row.createdAt).toLocaleDateString() // Format date
         },
         {
             name: 'Account Status',
@@ -67,7 +68,7 @@ const Table = () => {
                         <input
                             type="checkbox"
                             checked={row.AccountStatus === 'Active'}
-                            onChange={() => toggleStatus(row.Email)}
+                            onChange={() => toggleStatus(row.email)} // Correct field name from schema
                         />
                         <span className="slider"></span>
                     </label>
@@ -80,7 +81,6 @@ const Table = () => {
         },
         {
             name: 'Action',
-            selector: row => row.Action,
             cell: row => (
                 <button
                     style={{
@@ -91,33 +91,20 @@ const Table = () => {
                         padding: '10px 10px',
                         cursor: 'pointer'
                     }}
-                    onClick={() => handleViewProfile(row.Email)}
+                    onClick={() => handleViewProfile(row.email)} // Correct field name from schema
                 >
                     View Profile
                 </button>
             ),
-            sortable: true
+            ignoreRowClick: true, // Prevent row click event
+            allowOverflow: true,
+            button: true
         },
     ];
 
-    // Fetch user data from the API
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/api/users');
-                setRecords(response.data);
-                setFilteredRecords(response.data); // Initialize filtered records
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-
-        fetchUsers();
-    }, []);
-
     const handleFilter = () => {
         const newData = records.filter(row => {
-            const fullName = `${row.Fname} ${row.Lname}`.toLowerCase(); // Corrected template literal
+            const fullName = row.fullname.toLowerCase(); // Correct field name from schema
             return fullName.includes(searchTerm.toLowerCase());
         });
         setFilteredRecords(newData); // Update filtered records
@@ -125,7 +112,7 @@ const Table = () => {
 
     const toggleStatus = (email) => {
         const updatedRecords = records.map(record => {
-            if (record.Email === email) {
+            if (record.email === email) { // Correct field name from schema
                 return {
                     ...record,
                     AccountStatus: record.AccountStatus === 'Active' ? 'Inactive' : 'Active'
@@ -140,6 +127,19 @@ const Table = () => {
     const handleViewProfile = (email) => {
         console.log(`Viewing profile for: ${email}`); // Corrected string interpolation
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/path/to/your/api/endpoint'); // Adjust the API endpoint
+                setRecords(response.data); // Assuming response data is an array of users
+                setFilteredRecords(response.data); // Initialize filtered records
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <div className='container mt-5'>
