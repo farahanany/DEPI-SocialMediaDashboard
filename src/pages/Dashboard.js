@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [accountStatusData, setAccountStatusData] = useState([]);
   const [accountTypeData, setAccountTypeData] = useState([]);
+  const [genderData, setGenderData] = useState([]); // New state for gender data
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -51,6 +52,16 @@ const Dashboard = () => {
     setAccountTypeData([
       { name: 'Personal Accounts', value: personalCount },
       { name: 'Business Accounts', value: businessCount },
+    ]);
+
+    // New logic to calculate gender statistics
+    const maleCount = data.filter(user => user.gender === 'male').length;
+    const femaleCount = data.filter(user => user.gender === 'female').length;
+
+    // Set gender data for the chart
+    setGenderData([
+      { name: 'Male', value: maleCount, color: '#0088FE' },
+      { name: 'Female', value: femaleCount, color: '#FFBB28' },
     ]);
   };
 
@@ -105,6 +116,27 @@ const Dashboard = () => {
                   dataKey="value"
                 >
                   {accountStatusData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Legend />
+              </PieChart>
+            </div>
+
+            {/* Gender Distribution Pie Chart */}
+            <div className="chart-box">
+              <h3>Gender Distribution</h3>
+              <PieChart width={250} height={250}>
+                <Pie
+                  data={genderData}
+                  cx={"50%"}
+                  cy={"50%"}
+                  innerRadius={50}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {genderData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
