@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/Register.css';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';  // Add axios for API requests
 
 const Register = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [fullname, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -41,9 +42,10 @@ const Register = () => {
         gender
       });
 
-      // Handle successful registration (response)
+      // Handle successful registration
       console.log(response.data);
       alert('Registration successful!');
+      navigate('/dashboard'); // Redirect to /dashboard on success
     } catch (error) {
       // Handle error (e.g., duplicate username/email, etc.)
       console.error(error.response?.data?.msg || "An error occurred.");

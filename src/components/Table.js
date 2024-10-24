@@ -94,8 +94,7 @@ const Table = () => {
                     onClick={() => handleViewProfile(row.email)}
                 >
                     View Profile
-               
-                    </button>
+                </button>
             )
         }
     ];
@@ -103,7 +102,8 @@ const Table = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('/api/users'); 
+                const response = await axios.get('/api/users');
+                console.log('Fetched users:', response.data); // Log fetched users
                 setRecords(response.data);
                 setFilteredRecords(response.data);
             } catch (error) {
@@ -121,13 +121,16 @@ const Table = () => {
             record.email.toLowerCase().includes(e.target.value.toLowerCase())
         );
         setFilteredRecords(filteredData);
+        console.log('Filtered records:', filteredData); // Log filtered records
     };
 
     const toggleStatus = async (email) => {
         try {
             const user = records.find(record => record.email === email);
+            console.log('Current user:', user); // Log current user
             const updatedStatus = user.AccountStatus === 'Active' ? 'Inactive' : 'Active';
-            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus }); 
+            await axios.put(`/api/users/${email}`, { AccountStatus: updatedStatus });
+            console.log('Updated user status:', { email, AccountStatus: updatedStatus }); // Log updated status
             setRecords(prevRecords =>
                 prevRecords.map(record =>
                     record.email === email ? { ...record, AccountStatus: updatedStatus } : record
