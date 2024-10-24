@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Ensure this import is correct
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'; // Import eye icons
 import "../styles/Login.css";
-import {login} from '../redux/actions/userActions'; // Import userActions from redux
+import {login} from '../redux/actions/authActions'; // Import userActions from redux
 import {useDispatch} from 'react-redux'; // Import useDispatch from react-redux
 const Login = () => {
   const initialState = { email: '', password: '' } // Fixed state naming convention

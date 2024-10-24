@@ -1,0 +1,102 @@
+.Sidebar {
+    position: fixed; /* Fixes the sidebar to the left */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full height of the viewport */
+    width: 250px;
+    background-color: #1c6b92;
+    padding: 0;
+    margin: 0;
+    z-index: 100; /* Ensures the sidebar stays on top of content */
+}
+
+.sidebar-logo-img {
+    width: 200px;
+    margin-bottom: 0px;
+}
+
+.sidebarlist {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebarlist .row {
+    width: 100%;
+    height: 60px;
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-family: "Afacad Flux", sans-serif;
+    font-size: 20px;
+}
+
+.sidebarlist .row:hover {
+    cursor: pointer;
+    background-color: #155571;
+}
+
+.sidebarlist #active {
+    background-color: #155571;
+}
+
+.row #icon {
+    flex: 30%;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+}
+
+.row #title {
+    flex: 70%;
+}
+
+/* Media Query for Small Devices (Mobile, Tablets) */
+@media (max-width: 768px) {
+    .Sidebar {
+        width: 60px; /* Shrinks the sidebar */
+    }
+
+    .sidebar-logo-img {
+        display: none; /* Hide the logo on small screens */
+    }
+
+    .sidebarlist .row {
+        font-size: 14px; /* Smaller font size */
+        height: 50px;
+        justify-content: flex-start;
+    }
+
+    .row #icon {
+        font-size: 20px; /* Smaller icon */
+    }
+
+    .row #title {
+        display: none; /* Hide titles on small screens */
+    }
+}
+
+/* Media Query for Extra Small Devices (Mobile in Portrait) */
+@media (max-width: 480px) {
+    .Sidebar {
+        width: 50px; /* Collapse even more */
+    }
+
+    .sidebarlist .row {
+        height: 40px; /* Even smaller height */
+        justify-content: center;
+    }
+
+    .row #icon {
+        font-size: 18px;
+    }
+
+    .row #title {
+        display: none;
+    }
+}
